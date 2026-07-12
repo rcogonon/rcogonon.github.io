@@ -309,21 +309,22 @@
     box-shadow:0 12px 30px rgba(0,0,0,.4), 0 0 0 14px rgba(66,199,255,.18);
   }
   .play-overlay svg{ width:26px; height:26px; margin-left:4px; }
-  /* Replay button (bottom-left of playing video) */
-  .replay-btn{
-    position:absolute; bottom:12px; left:12px; z-index:3;
-    background:rgba(10,18,32,.75); backdrop-filter:blur(8px);
-    color:var(--accent); border:1px solid rgba(255,255,255,.06);
-    border-radius:8px; padding:8px 12px;
-    font-family:'Inter',sans-serif; font-size:11.5px; font-weight:600; letter-spacing:.04em;
+  /* Close (X) button while video is playing — small, subtle, top-right */
+  .close-video-btn{
+    position:absolute; top:10px; right:56px; z-index:4;
+    width:32px; height:32px; border-radius:50%;
+    background:rgba(10,18,32,.65); backdrop-filter:blur(6px);
+    color:#fff; border:1px solid rgba(255,255,255,.08);
     cursor:pointer;
-    display:flex; align-items:center; gap:6px;
-    transition:background .2s ease, color .2s ease, border-color .2s ease;
+    display:flex; align-items:center; justify-content:center;
+    opacity:.5;
+    transition:opacity .2s ease, background .2s ease, transform .2s ease;
   }
-  .replay-btn:hover{
-    background:var(--accent); color:#08121f; border-color:var(--accent);
+  .close-video-btn:hover{
+    opacity:1; background:var(--accent); color:#08121f;
+    border-color:var(--accent); transform:scale(1.05);
   }
-  .replay-btn svg{ width:12px; height:12px; }
+  .close-video-btn svg{ width:14px; height:14px; }
   .expand-btn{
     position:absolute; top:12px; right:12px; z-index:3;
     background:rgba(10,18,32,.75); backdrop-filter:blur(8px);
@@ -466,21 +467,23 @@
     /* Profile block still 2-col — tighter proportions */
     .profile-block{
       grid-template-columns:34% 1fr;
-      gap:16px;
-      padding:0 5% 44px 5%;
+      gap:18px;
+      padding:0 5% 46px 5%;
       margin-top:-90px;
     }
-    .avatar-cutout{max-height:420px;}
-    .profile-info{padding-top:60px;}
-    h1{font-size:26px; line-height:1.08;}
-    .role-line{font-size:11.5px;}
+    .avatar-cutout{max-height:440px;}
+    .profile-info{padding-top:64px;}
+    h1{font-size:26px; line-height:1.06;}
+    .role-line{font-size:11.5px; line-height:1.4;}
     .role-line .sep{margin:0 5px;}
-    .lede{font-size:12.5px; margin-top:12px;}
+    .lede{font-size:12.5px; margin-top:12px; line-height:1.55;}
     .cta-row{gap:6px; margin-top:18px;}
-    .btn{padding:8px 13px; font-size:11.5px; border-radius:30px;}
-    .stat-row{gap:12px; margin-top:22px; flex-wrap:nowrap;}
-    .stat b{font-size:17px;}
-    .stat span{font-size:8.5px; letter-spacing:.03em; line-height:1.25;}
+    .btn{padding:8px 12px; font-size:11px; border-radius:30px;}
+    /* Stats stack vertically for clean look at narrow widths */
+    .stat-row{flex-direction:column; gap:10px; margin-top:22px; align-items:flex-start;}
+    .stat{display:flex; align-items:baseline; gap:8px;}
+    .stat b{display:inline; font-size:17px;}
+    .stat span{font-size:9.5px; letter-spacing:.04em;}
 
     section h2{font-size:26px;}
     .work-card{padding:18px;}
@@ -511,20 +514,20 @@
 
     .profile-block{
       grid-template-columns:36% 1fr;
-      gap:12px;
+      gap:14px;
       padding:0 4% 36px 4%;
       margin-top:-70px;
     }
-    .avatar-cutout{max-height:360px;}
+    .avatar-cutout{max-height:380px;}
     .profile-info{padding-top:44px;}
     h1{font-size:22px;}
     .role-line{font-size:10.5px;}
     .lede{font-size:11.5px; margin-top:10px;}
     .cta-row{gap:5px; margin-top:14px;}
-    .btn{padding:6px 10px; font-size:10.5px;}
-    .stat-row{gap:9px; margin-top:18px;}
-    .stat b{font-size:14.5px;}
-    .stat span{font-size:7.5px; letter-spacing:.02em; line-height:1.2;}
+    .btn{padding:6px 10px; font-size:10px;}
+    .stat-row{gap:8px; margin-top:16px;}
+    .stat b{font-size:15px;}
+    .stat span{font-size:9px; letter-spacing:.03em;}
 
     section h2{font-size:22px;}
     .eyebrow{font-size:11.5px; letter-spacing:.14em; margin-bottom:14px;}
@@ -551,11 +554,15 @@
   }
 
   @media (max-width:400px){
-    .profile-block{gap:10px; grid-template-columns:38% 1fr;}
+    .profile-block{gap:10px; grid-template-columns:38% 1fr; padding:0 4% 30px 4%;}
+    .avatar-cutout{max-height:320px;}
+    .profile-info{padding-top:36px;}
     h1{font-size:19px;}
+    .role-line{font-size:9.5px;}
+    .lede{font-size:11px;}
     .btn{padding:5px 8px; font-size:9.5px;}
-    .stat b{font-size:12.5px;}
-    .stat span{font-size:7px;}
+    .stat b{font-size:13.5px;}
+    .stat span{font-size:8.5px;}
     nav a{font-size:11.5px; padding:3px 5px;}
     section h2{font-size:20px;}
   }
@@ -819,11 +826,7 @@
   <div class="work-grid">
 
     <div class="work-card">
-      <div class="work-media" data-video-id="1WBAiD3Ti7Plsf2MgXUaQWbIJMItCuK6p">
-        <button class="expand-btn" data-video-id="1WBAiD3Ti7Plsf2MgXUaQWbIJMItCuK6p" data-title="DPWH">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-          Expand
-        </button>
+      <div class="work-media" data-video-id="1WBAiD3Ti7Plsf2MgXUaQWbIJMItCuK6p" data-title="DPWH">
         <div class="video-poster" style="background-image:url('https://drive.google.com/thumbnail?id=1WBAiD3Ti7Plsf2MgXUaQWbIJMItCuK6p&sz=w1200');">
           <button class="play-overlay" aria-label="Play video">
             <svg viewBox="0 0 24 24" fill="#08121f"><path d="M8 5v14l11-7z"/></svg>
@@ -1039,7 +1042,7 @@
     if (e.key === "Escape" && modal.classList.contains("active")) closeVideoModal();
   });
 
-  // Inline video: poster → play → replay
+  // Inline video: poster → play → subtle X to close
   document.querySelectorAll(".work-media").forEach(media => {
     const videoId = media.getAttribute("data-video-id");
     if (!videoId) return;
@@ -1048,35 +1051,29 @@
     const playBtn = media.querySelector(".play-overlay");
     if (!playBtn) return;
 
-    // Helper to reset the media back to poster/thumbnail state
-    function revertToPoster(iframe, replay){
-      if (iframe && iframe.parentNode) iframe.remove();
-      if (replay && replay.parentNode) replay.remove();
-      poster.style.display = "flex";
-    }
-
     playBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      // Create iframe and load video
       const iframe = document.createElement("iframe");
       iframe.src = "https://drive.google.com/file/d/" + videoId + "/preview";
       iframe.setAttribute("allow", "autoplay");
       iframe.setAttribute("allowfullscreen", "");
       iframe.setAttribute("frameborder", "0");
-      // Hide poster; show iframe
       poster.style.display = "none";
       media.appendChild(iframe);
 
-      // Replay button (bottom-left) — click to return to thumbnail state
-      const replay = document.createElement("button");
-      replay.className = "replay-btn";
-      replay.setAttribute("aria-label", "Back to thumbnail");
-      replay.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg> Back to thumbnail';
-      replay.addEventListener("click", (ev) => {
+      // Small, subtle X in the top-right — barely visible, doesn't distract playback
+      const closeBtn = document.createElement("button");
+      closeBtn.className = "close-video-btn";
+      closeBtn.setAttribute("aria-label", "Close video");
+      closeBtn.setAttribute("title", "Close (return to thumbnail)");
+      closeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+      closeBtn.addEventListener("click", (ev) => {
         ev.stopPropagation();
-        revertToPoster(iframe, replay);
+        iframe.remove();
+        closeBtn.remove();
+        poster.style.display = "flex";
       });
-      media.appendChild(replay);
+      media.appendChild(closeBtn);
     });
   });
 </script>
