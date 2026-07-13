@@ -128,14 +128,14 @@
     letter-spacing:.14em;
   }
 
-  /* Hero subtitle — bold uppercase below the name */
+  /* Hero subtitle — medium weight uppercase below the name, soft gray */
   .hero-subtitle{
     font-family:'Inter',sans-serif;
-    font-size:13px; font-weight:700;
+    font-size:13px; font-weight:500;
     letter-spacing:.14em; text-transform:uppercase;
-    color:var(--text);
-    margin-top:14px;
-    opacity:.9;
+    color:var(--text-soft);
+    margin-top:10px;
+    opacity:.85;
   }
   .avatar-column::before{
     /* Soft glow behind the cutout figure */
@@ -505,13 +505,13 @@
     .profile-block{
       grid-template-columns:minmax(90px, 28%) 1fr;
       grid-template-rows:auto auto auto auto auto;
-      column-gap:14px;
+      column-gap:16px;
       row-gap:16px;
-      padding:24px 5% 40px 5%;
-      margin-top:0;
+      padding:0 5% 40px 5%;
+      margin-top:-40px;
       align-items:start;
     }
-    /* Photo becomes small square ID-style, only in row 1 */
+    /* Photo becomes small square ID-style, only in row 1, overlaps cover */
     .avatar-column{
       grid-column:1;
       grid-row:1;
@@ -530,8 +530,8 @@
     .profile-info{
       grid-column:2;
       grid-row:1;
-      padding-top:2px;
-      align-self:start;
+      padding-top:0;
+      align-self:center;  /* vertically center name+subtitle beside photo */
     }
     /* Everything below spans BOTH columns full width */
     .profile-block > .role-line{
